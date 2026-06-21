@@ -1,6 +1,14 @@
 def call() {
 
-    sh '''
-    scp target/*.war ubuntu@172.31.10.30:/opt/tomcat/webapps/
-    '''
+    deploy(
+        adapters: [
+            tomcat9(
+                credentialsId: 'tomcat_cred',
+                path: '',
+                url: 'http://3.111.30.231:8085/'
+            )
+        ],
+        contextPath: null,
+        war: '**/*.war'
+    )
 }
